@@ -2,7 +2,7 @@
   <v-container>
     <v-layout text-center wrap>
       <v-flex mt-4>
-        <h1 class="blue--text display-1 font-weight-bold my-12">
+        <h1 class="red--text display-1 font-weight-bold my-12">
           Welcome to Dating App
         </h1>
         <h1 class="display-2 font-weight-bold my-12">
