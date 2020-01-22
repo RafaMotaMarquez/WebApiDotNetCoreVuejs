@@ -17,20 +17,26 @@
             <v-row style="width:100%">
               <v-form id="loginFormSignIn">
                 <v-text-field
+                  v-model="username"
                   label="Login"
                   name="login"
                   prepend-icon="mdi-human-greeting"
                   type="text"
+                  required
                 />
 
                 <v-text-field
+                  v-model="password"
                   id="password"
                   label="Password"
                   name="password"
                   prepend-icon="mdi-lock"
                   type="password"
+                  required
                 />
-                <v-btn class="col-12 mb-12" color="primary">Login</v-btn>
+                <v-btn class="col-12 mb-12" color="primary" @click="login"
+                  >Login</v-btn
+                >
               </v-form>
               <h2 class="primary--text">Not a member yet ? Sign up</h2>
             </v-row>
@@ -42,7 +48,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
+  methods: {
+    login(username, password) {
+      username = this.username;
+      password = this.password;
+      console.log("*/*/*/*/*/*");
+      console.log(username);
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
