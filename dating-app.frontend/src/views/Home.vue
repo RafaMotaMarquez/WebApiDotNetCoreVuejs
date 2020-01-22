@@ -1,7 +1,7 @@
 <template>
   <!-- <Home /> -->
   <v-app id="home-view">
-    <v-app-bar app color="red lighten-1" dark>
+    <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-img
           alt="Fire dragon"

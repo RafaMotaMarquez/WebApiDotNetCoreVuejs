@@ -1,25 +1,21 @@
 <template>
   <v-content>
-    <v-container class="fill-height" fluid>
-      <v-row align="center" justify="center">
-        <v-col cols="12" sm="8" md="4">
-          <v-card class="elevation-12">
-            <v-toolbar height="100" color="red lighten-1" dark flat>
-              <v-toolbar-title>
-                <h1 class="title ">Login to</h1>
-
-                <v-img
-                  alt="Fire dragon"
-                  class="shrink mt-1 hidden-sm-and-down pl-0"
-                  contain
-                  min-width="150"
-                  src="@/assets/fireDragonLogo.svg"
-                  width="100"
-                />
-              </v-toolbar-title>
-            </v-toolbar>
-            <v-card-text>
-              <v-form>
+    <div id="loginFormContainer">
+      <div id="backgroundLoginImage" class="hidden-sm-and-down"></div>
+      <div id="loginForm">
+        <div>
+          <h1 class="mt-12">Sign in to</h1>
+          <v-img
+            alt="Fire dragon"
+            class="fireDragonlogo mt-1 pl-0"
+            contain
+            min-width="350"
+            src="@/assets/fireDragonLogoRed.svg"
+            width="150"
+          />
+          <v-container class="fluid">
+            <v-row style="width:100%">
+              <v-form id="loginFormSignIn">
                 <v-text-field
                   label="Login"
                   name="login"
@@ -34,16 +30,14 @@
                   prepend-icon="mdi-lock"
                   type="password"
                 />
+                <v-btn class="col-12 mb-12" color="primary">Login</v-btn>
               </v-form>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn color="red lighten-1 white--text">Login</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+              <h2 class="primary--text">Not a member yet ? Sign up</h2>
+            </v-row>
+          </v-container>
+        </div>
+      </div>
+    </div>
   </v-content>
 </template>
 
@@ -51,4 +45,44 @@
 export default {};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css?family=Lobster&display=swap");
+#loginFormContainer {
+  display: flex;
+  height: 100%;
+  #backgroundLoginImage {
+    display: flex;
+    flex: 7;
+    background: url("../assets/loginDragon.jpg") no-repeat center center;
+    background-size: cover;
+    div {
+      border: 1px solid grey;
+    }
+  }
+  #loginForm {
+    display: flex;
+    flex: 7;
+    background-color: cornsilk;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: center;
+      h1,
+      h2 {
+        font-family: "Lobster", cursive;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+      div.fireDragonlogo {
+        max-height: 80px;
+      }
+      #loginFormSignIn {
+        width: 35%;
+      }
+    }
+  }
+}
+</style>
