@@ -5,14 +5,14 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import axios from "axios";
 import VueAxios from "vue-axios";
-
+window.Vue = require("vue");
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
   vuetify,
-  VueAxios,
   axios,
+  VueAxios,
   render: h => h(App)
 }).$mount("#app");

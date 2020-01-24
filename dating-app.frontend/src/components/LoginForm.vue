@@ -15,11 +15,12 @@
           />
           <v-container class="fluid">
             <v-row style="width:100%">
-              <v-form id="loginFormSignIn">
+              <v-form ref="form" v-model="valid" id="loginFormSignIn">
                 <v-text-field
                   v-model="username"
-                  label="Login"
-                  name="login"
+                  label="Username"
+                  name="username"
+                  :rules="usernameRules"
                   prepend-icon="mdi-human-greeting"
                   type="text"
                   required
@@ -30,11 +31,16 @@
                   id="password"
                   label="Password"
                   name="password"
+                  :rules="passwordRules"
                   prepend-icon="mdi-lock"
                   type="password"
                   required
                 />
-                <v-btn class="col-12 mb-12" color="primary" @click="login"
+                <v-btn
+                  :disabled="!valid"
+                  class="col-12 mb-12 mt-8"
+                  color="primary"
+                  @click="login"
                   >Login</v-btn
                 >
               </v-form>
@@ -52,22 +58,78 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      valid: true,
+      usernameRules: [
+        v => !!v || "Username is required",
+        v =>
+          (v && v.length >= 4) || "Username must be at least 4 characters long",
+        v => (v && v.length <= 10) || "Username must be less than 10 characters"
+      ],
+      password: "",
+      passwordRules: [
+        v => !!v || "Password is required",
+        v =>
+          (v && v.length >= 4) || "Password must be at least 4 characters long",
+        v => (v && v.length <= 10) || "Password must be less than 10 characters"
+      ],
+      errors: [],
+      info: null,
+      loading: true,
+      errored: false
     };
+  },
+  mounted() {
+    Vue.axios
+      .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+      .then(response => {
+        console.log(response.data);
+      });
+    // axios
+    //   .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+    //   .then(response => {
+    //     this.info = response.data.bpi;
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     this.errored = true;
+    //   })
+    //   .finally(() => (this.loading = false));
+    // GET /someUrl
   },
   methods: {
     login(username, password) {
       username = this.username;
       password = this.password;
-      console.log("*/*/*/*/*/*");
-      console.log(username);
+      var creds = { username, password };
+      this.$http.post("http://localhost:5000/api/auth/login", creds).then(
+        response => {
+          console.log("*/*/*/*/*/*");
+          console.log(response);
+        },
+        error => {
+          console.log("*/*/*/*/*/*");
+          console.log(error);
+        }
+      );
+      // axios
+      //   .post("http://localhost:5000/api/auth/login", {
+      //     body: creds
+      //   })
+      //   .then(response => {})
+      //   .catch(e => {
+      //     this.errors.push(e);
+      //     console.log("*/*/*/*/*/*");
+      //     console.log(this.errors);
+      //   });
+
+      // return creds;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css?family=Lobster&display=swap");
+// @import url("https://fonts.googleapis.com/css?family=Lobster&display=swap");
 #loginFormContainer {
   display: flex;
   height: 100%;
